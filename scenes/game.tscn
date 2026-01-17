@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfghnrdq3amtn"]
+
+[ext_resource type="PackedScene" uid="uid://muwm8cqgrbkp" path="res://scenes/ceiling.tscn" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://dbravapgtlax6" path="res://scenes/paddle.tscn" id="1_qxrlw"]
+[ext_resource type="Script" uid="uid://cqx7gv2yt73se" path="res://scripts/game.gd" id="1_wrm1d"]
+[ext_resource type="Script" uid="uid://cy0ya1gft4l7u" path="res://scripts/paddle.gd" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bf43prnih4u5l" path="res://scenes/ball.tscn" id="4_i6g32"]
+[ext_resource type="Script" uid="uid://cdu5hn7g2ox4p" path="res://scripts/ball.gd" id="5_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://cx44udtpynepc" path="res://scenes/goal.tscn" id="5_wowpa"]
+[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/Fonts/PublicPixel.otf" id="8_v158k"]
+
+[sub_resource type="GDScript" id="GDScript_1l0tm"]
+script/source = "extends StaticBody2D
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
+font = ExtResource("8_v158k")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_v158k"]
+font = ExtResource("8_v158k")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l0tm"]
+font = ExtResource("8_v158k")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_ldgsr"]
+font = ExtResource("8_v158k")
+font_size = 36
+
+[sub_resource type="Curve" id="Curve_v158k"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20348838, 0.6741574), 5.9910073, 5.9910073, 0, 0, Vector2(0.511628, 0.43820232), 3.865169, 3.865169, 0, 0, Vector2(0.7732559, 0.1685394), 3.704121, 3.704121, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_wrm1d")
+
+[node name="Paddle_P1" parent="." instance=ExtResource("1_qxrlw")]
+position = Vector2(40, 360)
+script = ExtResource("3_3dryh")
+is_player_one = true
+
+[node name="Paddle_P2" parent="." instance=ExtResource("1_qxrlw")]
+position = Vector2(1240, 360)
+rotation = 3.1415927
+script = ExtResource("3_3dryh")
+
+[node name="Ball" parent="." instance=ExtResource("4_i6g32")]
+position = Vector2(640, 360)
+scale = Vector2(0.505, 0.505)
+script = ExtResource("5_1l0tm")
+
+[node name="Ceiling" parent="." instance=ExtResource("1_ebmjs")]
+script = SubResource("GDScript_1l0tm")
+
+[node name="Goal_Left" parent="." instance=ExtResource("5_wowpa")]
+is_player_one_goal = true
+
+[node name="Goal_Right" parent="." instance=ExtResource("5_wowpa")]
+position = Vector2(1280, 720)
+rotation = -3.1415927
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="P1_Score" type="Label" parent="CanvasLayer"]
+offset_left = 300.0
+offset_top = 20.0
+offset_right = 370.0
+offset_bottom = 96.0
+text = "0"
+label_settings = SubResource("LabelSettings_h4fw4")
+horizontal_alignment = 1
+
+[node name="P2_Score" type="Label" parent="CanvasLayer"]
+offset_left = 940.0
+offset_top = 20.0
+offset_right = 1000.0
+offset_bottom = 125.0
+text = "0"
+label_settings = SubResource("LabelSettings_v158k")
+horizontal_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer"]
+offset_left = 663.0
+offset_top = 350.0
+offset_right = 683.0
+offset_bottom = 378.0
+text = "0"
+label_settings = SubResource("LabelSettings_1l0tm")
+horizontal_alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 368.0
+offset_top = 224.0
+offset_right = 908.0
+offset_bottom = 260.0
+text = "Player {} Wins!"
+label_settings = SubResource("LabelSettings_ldgsr")
+horizontal_alignment = 1
+
+[node name="Break_Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="GameOverParticles" type="CPUParticles2D" parent="."]
+position = Vector2(640, 0)
+emitting = false
+amount = 500
+lifetime = 1.2
+speed_scale = 0.8
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_rect_extents = Vector2(640, 1)
+spread = 0.0
+gravity = Vector2(0, 680)
+angle_max = 267.2
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_v158k")

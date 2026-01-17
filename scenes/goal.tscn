@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx44udtpynepc"]
+
+[ext_resource type="Script" uid="uid://xm6pcevowsg3" path="res://scripts/goal.gd" id="1_2lgk0"]
+[ext_resource type="AudioStream" uid="uid://g0xyn6n30tve" path="res://assets/Sounds/Goal.wav" id="1_paeek"]
+[ext_resource type="PackedScene" uid="uid://bc3evuqwerqt4" path="res://scenes/goal_explosion.tscn" id="2_in2gb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ax2ce"]
+size = Vector2(20, 720)
+
+[node name="Goal" type="Area2D" groups=["Goal"]]
+script = ExtResource("1_2lgk0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 360)
+shape = SubResource("RectangleShape2D_ax2ce")
+
+[node name="GoalExplosion" parent="." instance=ExtResource("2_in2gb")]
+position = Vector2(-10, 360)
+scale = Vector2(6, 6)
+
+[node name="GoalSound" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+stream = ExtResource("1_paeek")
