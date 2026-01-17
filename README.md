@@ -1,2 +1,2 @@
-# pong-attemp-2
+# pong-in-godot
 
