@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://151w7gli2cjs"
-path="res://.godot/imported/Paddle.wav-87ea18c55a96a88fe2582f2d3abb2a00.sample"
+path="res://.godot/imported/Paddle.wav-3703d4304a5dd40a7cc5a8fe801a6898.sample"
 
 [deps]
 
-source_file="res://assets/Sounds/Paddle.wav"
-dest_files=["res://.godot/imported/Paddle.wav-87ea18c55a96a88fe2582f2d3abb2a00.sample"]
+source_file="res://assets/sounds/Paddle.wav"
+dest_files=["res://.godot/imported/Paddle.wav-3703d4304a5dd40a7cc5a8fe801a6898.sample"]
 
 [params]
 

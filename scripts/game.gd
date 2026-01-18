@@ -55,6 +55,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		_reset()
 	elif event.is_action_pressed("show_lines"):
 		ball_path.visible = !ball_path.visible
+	elif event.is_action_pressed("main_menu"):
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 
 func _draw() -> void:
@@ -124,6 +126,16 @@ func _simulate_ball_movement(seconds: float = 3.0):
 		
 	_update_ball_path(points)
 
+
+func _is_win_by_two() -> bool:
+	return abs(score.x - score.y) >= 2
+
+
+func _tie_break_handler() -> void:
+	win_score += 1
+	_reset()
+	
+	
 func _goal_handler(is_player_one_goal: bool) -> void:
 	is_recent_goal_left = is_player_one_goal
 	
@@ -135,10 +147,20 @@ func _goal_handler(is_player_one_goal: bool) -> void:
 		p1_score.text = str(score.x)
 	
 	if score.x == win_score:
+		# win by 2 check
+		if !_is_win_by_two():
+			_tie_break_handler()
+			return
+			
 		winner = "paddle_one"
 		_game_over_routine()
 		return
 	elif score.y == win_score:
+		# win by 2 check
+		if !_is_win_by_two():
+			_tie_break_handler()
+			return
+			
 		winner = "paddle_two"
 		_game_over_routine()
 		return
@@ -167,7 +189,10 @@ func _game_over_routine() -> void:
 	winner_label.visible = true
 	
 	if winner == "paddle_one":
-		winner_label.text = "Player One Wins!"
+		if paddle_two.is_ai:
+			winner_label.text = "You Win!"
+		else:
+			winner_label.text = "Player One Wins!"
 	elif winner == "paddle_two" and paddle_two.is_ai:
 		winner_label.text = "The Robot Wins!"
 	elif winner == "paddle_two":

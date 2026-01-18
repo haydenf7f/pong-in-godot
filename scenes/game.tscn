@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bf43prnih4u5l" path="res://scenes/ball.tscn" id="4_i6g32"]
 [ext_resource type="Script" uid="uid://cdu5hn7g2ox4p" path="res://scripts/ball.gd" id="5_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cx44udtpynepc" path="res://scenes/goal.tscn" id="5_wowpa"]
-[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/Fonts/PublicPixel.otf" id="8_v158k"]
+[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="8_v158k"]
 
 [sub_resource type="GDScript" id="GDScript_1l0tm"]
 script/source = "extends StaticBody2D
@@ -41,7 +41,6 @@ point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-win_score = 2
 
 [node name="Paddle_P1" parent="." instance=ExtResource("1_qxrlw")]
 position = Vector2(40, 360)

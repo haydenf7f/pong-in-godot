@@ -1,0 +1,377 @@
+[gd_scene load_steps=10 format=3 uid="uid://celkpsi818twk"]
+
+[ext_resource type="Script" uid="uid://ctc51kluoy5vr" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/Fonts/PublicPixel.otf" id="3_bqqt6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l6cm7"]
+font = ExtResource("1_l6cm7")
+font_size = 72
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font = ExtResource("1_l6cm7")
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+bg_color = Color(0.36078432, 0.36078432, 0.36078432, 0.3372549)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_bqqt6"]
+line_spacing = 10.0
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.14406255, 0.14406255, 0.14406249, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Main" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleContainer" type="Control" parent="Main"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="Main/TitleContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 368.0
+offset_top = 32.0
+offset_right = 872.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PonginG"
+label_settings = SubResource("LabelSettings_l6cm7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtext" type="Label" parent="Main/TitleContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 372.0
+offset_top = 114.0
+offset_right = 876.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "(Pong in Godot)"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 457.0
+offset_top = 300.0
+offset_right = 783.0
+offset_bottom = 528.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 60
+
+[node name="Play" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+text = "Play"
+
+[node name="Quit" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
+text = "Quit
+"
+
+[node name="PlayContainer" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PaddleControls" type="Label" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 324.0
+offset_bottom = 344.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "Left Paddle
+W - Up
+S - Down"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="MenuControl" type="Label" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 424.0
+offset_right = 364.0
+offset_bottom = 456.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "Esc - Main Menu"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="Rules" type="Label" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 544.0
+offset_right = 324.0
+offset_bottom = 608.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "First to 11
+Win by 2"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="Back" type="Button" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 72.0
+offset_right = 224.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_bqqt6")
+text = "← Back"
+
+[node name="Tooltips" type="Control" parent="PlayContainer"]
+anchors_preset = 0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -40.0
+
+[node name="PVPTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 976.0
+offset_top = 336.0
+offset_right = 1236.0
+offset_bottom = 424.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "Right Paddle
+↑ - Up
+↓ - Down"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="EasyTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 379.0
+offset_right = 1204.0
+offset_bottom = 439.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "• 0.7x Paddle Speed
+• Inacurrate"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="NormalTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 440.0
+offset_right = 1204.0
+offset_bottom = 500.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "• 0.8x Paddle Speed
+• Moderately Accurate"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="HardTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 502.0
+offset_right = 1244.0
+offset_bottom = 562.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "• 0.95x Paddle Speed
+• Accurate"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="NightmareTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 547.0
+offset_right = 1244.0
+offset_bottom = 627.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "• 1x Paddle Speed
+• Accurate
+• Foresight"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="ImpossibleTooltip" type="Label" parent="PlayContainer/Tooltips"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 597.0
+offset_right = 1244.0
+offset_bottom = 707.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "• 1.5x Paddle Speed
+• Accurate
+• Foresight
+• Cheats"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="VBoxGamemodes" type="VBoxContainer" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 136.00003
+offset_right = 650.3287
+offset_bottom = 376.00003
+scale = Vector2(1.9307566, 1.9105706)
+theme_override_constants/separation = 14
+
+[node name="SelectMode" type="Label" parent="PlayContainer/VBoxGamemodes"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "Select Gamemode"
+
+[node name="PVP" type="Button" parent="PlayContainer/VBoxGamemodes"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "PLAYER VS PLAYER
+"
+
+[node name="VBoxDifficulties" type="VBoxContainer" parent="PlayContainer/VBoxGamemodes"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="DifficultyMode" type="Label" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "AI"
+
+[node name="Easy" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "EASY"
+
+[node name="Normal" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "NORMAL"
+
+[node name="Hard" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "HARD"
+
+[node name="Nightmare" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "NIGHTMARE"
+
+[node name="Impossible" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 16
+text = "IMPOSSIBLE"
+
+[connection signal="pressed" from="Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="PlayContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/PVP" to="." method="_on_pvp_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/PVP" to="." method="_on_pvp_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/PVP" to="." method="_on_pvp_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Easy" to="." method="_on_easy_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Easy" to="." method="_on_easy_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Easy" to="." method="_on_easy_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Normal" to="." method="_on_normal_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Normal" to="." method="_on_normal_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Normal" to="." method="_on_normal_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Hard" to="." method="_on_hard_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Hard" to="." method="_on_hard_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Hard" to="." method="_on_hard_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Nightmare" to="." method="_on_nightmare_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Nightmare" to="." method="_on_nightmare_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Nightmare" to="." method="_on_nightmare_pressed"]
+[connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Impossible" to="." method="_on_impossible_mouse_entered"]
+[connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Impossible" to="." method="_on_impossible_mouse_exited"]
+[connection signal="pressed" from="PlayContainer/VBoxGamemodes/VBoxDifficulties/Impossible" to="." method="_on_impossible_pressed"]

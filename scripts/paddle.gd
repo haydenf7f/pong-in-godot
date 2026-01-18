@@ -1,6 +1,7 @@
 extends Area2D
 
-var speed := 600
+const DEFAULT_SPEED: float = 600
+var speed := 600.0
 var direction := 0.0
 var initial_position = Vector2(global_position.x, global_position.y)
 var ai_target_ypos := 360.0
@@ -25,23 +26,23 @@ func _ready() -> void:
 	if Global.current_mode == Global.Gamemode.PVP:
 		is_ai = false
 	elif Global.current_mode == Global.Gamemode.EASY and is_ai:
-		speed = 415
+		speed = 0.7 * DEFAULT_SPEED
 		ai_acc_lower = 5
-		ai_acc_upper = 60
+		ai_acc_upper = 75
 	elif Global.current_mode == Global.Gamemode.NORMAL and is_ai:
-		speed = 475
+		speed = 0.8 * DEFAULT_SPEED
 		ai_acc_lower = 2
-		ai_acc_upper = 50
+		ai_acc_upper = 65
 	elif Global.current_mode == Global.Gamemode.HARD and is_ai:
-		speed = 575
+		speed = 0.95 * DEFAULT_SPEED
 		ai_acc_lower = 2
 		ai_acc_upper = 35
 	elif Global.current_mode == Global.Gamemode.NIGHTMARE and is_ai:
-		speed = 600
+		speed = DEFAULT_SPEED
 		ai_acc_lower = 2
-		ai_acc_upper = 35
-	elif Global.current_mode ++ Global.Gamemode.IMPOSSIBLE and is_ai:
-		speed = 900
+		ai_acc_upper = 30
+	elif Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai:
+		speed = 1.5 * DEFAULT_SPEED
 		ai_accuracy = 0
 	
 	body_entered.connect(_on_body_entered)

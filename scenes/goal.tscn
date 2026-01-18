@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cx44udtpynepc"]
 
 [ext_resource type="Script" uid="uid://xm6pcevowsg3" path="res://scripts/goal.gd" id="1_2lgk0"]
-[ext_resource type="AudioStream" uid="uid://g0xyn6n30tve" path="res://assets/Sounds/Goal.wav" id="1_paeek"]
+[ext_resource type="AudioStream" uid="uid://g0xyn6n30tve" path="res://assets/sounds/Goal.wav" id="1_paeek"]
 [ext_resource type="PackedScene" uid="uid://bc3evuqwerqt4" path="res://scenes/goal_explosion.tscn" id="2_in2gb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ax2ce"]

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://g0xyn6n30tve"
-path="res://.godot/imported/Goal.wav-cfaf237ac2b134213e5bc06bdf098b8a.sample"
+path="res://.godot/imported/Goal.wav-f2c550e53e5629cb4ddd407d959c983b.sample"
 
 [deps]
 
-source_file="res://assets/Sounds/Goal.wav"
-dest_files=["res://.godot/imported/Goal.wav-cfaf237ac2b134213e5bc06bdf098b8a.sample"]
+source_file="res://assets/sounds/Goal.wav"
+dest_files=["res://.godot/imported/Goal.wav-f2c550e53e5629cb4ddd407d959c983b.sample"]
 
 [params]
 

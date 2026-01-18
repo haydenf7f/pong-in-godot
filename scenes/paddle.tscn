@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbravapgtlax6"]
 
-[ext_resource type="AudioStream" uid="uid://151w7gli2cjs" path="res://assets/Sounds/Paddle.wav" id="2_krcey"]
+[ext_resource type="AudioStream" uid="uid://151w7gli2cjs" path="res://assets/sounds/Paddle.wav" id="2_krcey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rripy"]
 size = Vector2(20, 100)
