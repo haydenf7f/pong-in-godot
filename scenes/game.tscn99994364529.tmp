@@ -46,6 +46,9 @@ win_score = 2
 [node name="Paddle_P1" parent="." instance=ExtResource("1_qxrlw")]
 position = Vector2(40, 360)
 script = ExtResource("3_3dryh")
+is_ai = null
+ai_acc_lower = null
+ai_acc_upper = null
 is_player_one = true
 
 [node name="Paddle_P2" parent="." instance=ExtResource("1_qxrlw")]
@@ -53,6 +56,9 @@ position = Vector2(1240, 360)
 rotation = 3.1415927
 script = ExtResource("3_3dryh")
 is_ai = true
+ai_acc_lower = null
+ai_acc_upper = null
+is_player_one = null
 
 [node name="Ball" parent="." groups=["Ball"] instance=ExtResource("4_i6g32")]
 position = Vector2(640, 360)
@@ -139,7 +145,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="GameOverTimer" type="Timer" parent="."]
-wait_time = 4.5
+wait_time = 6.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

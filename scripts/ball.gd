@@ -18,6 +18,11 @@ var initial_position = Vector2(global_position.x, global_position.y)
 var min_particle_velocity: float = 0
 var max_particle_velocity: float = 50
 
+@onready var cshape: CollisionShape2D = $CollisionShape2D
+
+signal bounced
+
+
 func _ready() -> void:
 	particle_trail.emitting = false
 	particle_trail.initial_velocity_min = min_particle_velocity
@@ -71,6 +76,9 @@ func bounce_off_paddle(paddle_y, paddle_height) -> void:
 	speed += speed_increase
 	num_collisions += 1
 	direction = Vector2(direction.x*-1, (ball_y - paddle_y) / (paddle_height/2))
+	
+	bounced.emit()
+	
 	_update_ball_particles()
 	
 
@@ -90,4 +98,8 @@ func reset(is_goal_left: bool) -> void:
 	
 	particle_trail.initial_velocity_min = min_particle_velocity
 	particle_trail.initial_velocity_max = max_particle_velocity
+	
+
+func get_size() -> Vector2:
+	return cshape.shape.get_rect().size
 	
