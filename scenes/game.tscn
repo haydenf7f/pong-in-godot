@@ -108,6 +108,7 @@ label_settings = SubResource("LabelSettings_1l0tm")
 horizontal_alignment = 1
 
 [node name="WinnerLabel" type="Label" parent="CanvasLayer"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

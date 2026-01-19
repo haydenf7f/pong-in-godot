@@ -22,7 +22,7 @@ extends Node2D
 
 var is_recent_goal_left: bool = false
 var winner: String = ""
-var score := Vector2i(10, 10)
+var score := Vector2i(0, 0)
 var is_ai_enabled := false
 
 @onready var ball_projection_pos: Label = $CanvasLayer/BallProjectionPos
