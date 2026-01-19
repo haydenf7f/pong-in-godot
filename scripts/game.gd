@@ -22,7 +22,7 @@ extends Node2D
 
 var is_recent_goal_left: bool = false
 var winner: String = ""
-var score := Vector2i(0, 0)
+var score := Vector2i(10, 10)
 var is_ai_enabled := false
 
 @onready var ball_projection_pos: Label = $CanvasLayer/BallProjectionPos
@@ -62,8 +62,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		ball_path.visible = !ball_path.visible
 	elif event.is_action_pressed("main_menu"):
 		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
-
-
+		
+	
 func _draw() -> void:
 	# draw the dashed line through the middle of the screen
 	var viewport_center_x := get_viewport_rect().size.x / 2
@@ -198,19 +198,24 @@ func _on_break_timer_timeout():
 	_simulate_ball_movement()
 
 
+
 func _game_over_routine() -> void:
 	game_over_timer.start()
 	winner_label.visible = true
 	
+	var current_gamemode_string := Global.gamemode_to_string(Global.current_mode)
+	
 	if winner == "paddle_one":
 		if paddle_two.is_ai:
-			winner_label.text = "You Win!"
+			winner_label.text = "You Defeated The %s Robot!" % current_gamemode_string
 		else:
 			winner_label.text = "Player One Wins!"
-	elif winner == "paddle_two" and paddle_two.is_ai:
-		winner_label.text = "The Robot Wins!"
 	elif winner == "paddle_two":
-		winner_label.text = "Player Two Wins!"
+		if paddle_two.is_ai:
+			winner_label.text = "The %s Robot Defeated You!" % current_gamemode_string
+		else:
+			winner_label.text = "Player Two Wins!"
+		
 	
 	game_over_particles.emitting = true
 	$Twinkle.play()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://celkpsi818twk"]
+[gd_scene load_steps=12 format=3 uid="uid://celkpsi818twk"]
 
 [ext_resource type="Script" uid="uid://ctc51kluoy5vr" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/Fonts/PublicPixel.otf" id="3_bqqt6"]
 [ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="3_wu84c"]
 [ext_resource type="AudioStream" uid="uid://c5g3xh6djekui" path="res://assets/sounds/Button.wav" id="4_wu84c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.1331965, 0.13319635, 0.13319644, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_l6cm7"]
 font = ExtResource("3_wu84c")
@@ -55,6 +58,7 @@ script = ExtResource("1_ekxnf")
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wu84c")
 
 [node name="Main" type="Control" parent="."]
 anchors_preset = 0

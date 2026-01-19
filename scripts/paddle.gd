@@ -3,8 +3,8 @@ extends Area2D
 const DEFAULT_SPEED: float = 600
 var speed := 600.0
 var direction := 0.0
-var initial_position = Vector2(global_position.x, global_position.y)
-var ai_target_ypos := 360.0
+@onready var initial_position = Vector2(global_position.x, global_position.y)
+@onready var ai_target_ypos := get_viewport_rect().size.y/2
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var paddle_height := collision_shape.get_shape().get_rect().size.y
@@ -74,8 +74,7 @@ func _process(delta: float) -> void:
 	# The IMPOSSIBLE AI gets to cheat by using the entire screen space
 	if Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai: return
 	
-	# clamps the y position of the paddle to 20 pixels below the top of the screen
-	# and 20 pixels above the bottom of the screen
+	# clamps the y position of the paddle to the specified pixel amount.
 	# I have to get the paddle height because the origin of the paddle is the top left corner
 	if is_ai:
 		position.y = clamp(position.y, paddle_height, get_viewport_rect().size.y - paddle_height)
