@@ -71,6 +71,10 @@ func _draw() -> void:
 	draw_dashed_line(Vector2(viewport_center_x, 0), Vector2(viewport_center_x, viewport_height), Color.GRAY, 5, 8, false) 
 
 
+func _on_ball_bounced() -> void:
+	_simulate_ball_movement()
+
+
 func _update_ball_path(points: Array[Vector2]):
 	ball_path.clear_points()
 	ball_path.global_position = ball.global_position
@@ -78,11 +82,7 @@ func _update_ball_path(points: Array[Vector2]):
 	for point in points:
 		var localized_point = ball_path.to_local(point)
 		ball_path.add_point(localized_point) # add a the point as a local point because lines are drawn using local pos not global pos
-
-
-func _on_ball_bounced() -> void:
-	_simulate_ball_movement()
-
+		
 
 func _simulate_ball_movement(seconds: float = 3.0):
 	var ball_pos = ball.global_position
@@ -90,8 +90,8 @@ func _simulate_ball_movement(seconds: float = 3.0):
 	var ball_size = ball.get_size()
 	
 	var ball_radius: float = ball_size.y/2
-	var top_limit: float = 0 + ball_radius
-	var bottom_limit: float = get_viewport_rect().size.y - ball_radius
+	var top_limit: float = 0 + ball_radius/2
+	var bottom_limit: float = get_viewport_rect().size.y - ball_radius/2
 	var left_limit: float = paddle_one.global_position.x + ball_radius
 	var right_limit: float = paddle_two.global_position.x - ball_radius
 	
@@ -117,8 +117,20 @@ func _simulate_ball_movement(seconds: float = 3.0):
 		
 		# If the projected path moves outside of the y limit then "bounce" the ball by flipping the y direction
 		if ball_pos.y <= top_limit or ball_pos.y >= bottom_limit:
+			ball_pos.y = clamp(ball_pos.y, top_limit, bottom_limit)
 			ball_dir.y *= -1
 			points.append(ball_pos)
+			
+		#if ball_pos.y < top_limit:
+			#var overshoot: float = top_limit - ball_pos.y
+			#ball_pos.y = top_limit + overshoot
+			#ball_dir.y = abs(ball_dir.y)
+			#points.append(ball_pos)
+		#elif ball_pos.y > bottom_limit:
+			#var overshoot: float= ball_pos.y - bottom_limit
+			#ball_pos.y = bottom_limit - overshoot
+			#ball_dir.y = -abs(ball_dir.y)
+			#points.append(ball_pos)
 	
 	points.append(ball_pos)
 	

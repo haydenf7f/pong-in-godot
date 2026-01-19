@@ -155,21 +155,33 @@ label_settings = SubResource("LabelSettings_bqqt6")
 [node name="MenuControl" type="Label" parent="PlayContainer"]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 424.0
+offset_top = 432.0
 offset_right = 364.0
-offset_bottom = 456.0
+offset_bottom = 464.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
 text = "Esc - Main Menu"
 label_settings = SubResource("LabelSettings_bqqt6")
 
+[node name="BallPathControl" type="Label" parent="PlayContainer"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 400.0
+offset_right = 364.0
+offset_bottom = 432.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 14
+text = "E - Ball Path"
+label_settings = SubResource("LabelSettings_bqqt6")
+
 [node name="Rules" type="Label" parent="PlayContainer"]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 544.0
+offset_top = 536.0
 offset_right = 324.0
-offset_bottom = 608.0
+offset_bottom = 600.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14

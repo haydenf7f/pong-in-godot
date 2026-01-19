@@ -21,6 +21,7 @@ var is_ai_enabled := false
 @export var is_player_one := false
 var input_enabled := true
 
+
 func _ready() -> void:
 	if Global.current_mode != Global.Gamemode.PVP or is_ai:
 		is_ai_enabled = true
@@ -46,6 +47,8 @@ func _ready() -> void:
 	elif Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai:
 		speed = 1.5 * DEFAULT_SPEED
 		ai_accuracy = 0
+		ai_acc_lower = 0
+		ai_acc_upper = 0
 		
 	reset()
 		
@@ -79,7 +82,7 @@ func _process(delta: float) -> void:
 	if is_ai:
 		position.y = clamp(position.y, paddle_height, get_viewport_rect().size.y - paddle_height)
 	else:
-		position.y = clamp(position.y, paddle_height/2 + 5, get_viewport_rect().size.y - paddle_height/2 - 5)
+		position.y = clamp(position.y, paddle_height/2 + 10, get_viewport_rect().size.y - paddle_height/2 - 10)
 
 
 func _get_ai_direction() -> float:
@@ -101,7 +104,8 @@ func _get_ai_direction() -> float:
 			return 1
 	
 	return 0
-	
+
+
 func _on_body_entered(body: Node2D) -> void:
 	if is_ai:
 		ai_accuracy = randf_range(ai_acc_lower, ai_acc_upper)
