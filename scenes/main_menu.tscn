@@ -1,15 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://celkpsi818twk"]
+[gd_scene load_steps=11 format=3 uid="uid://celkpsi818twk"]
 
 [ext_resource type="Script" uid="uid://ctc51kluoy5vr" path="res://scripts/main_menu.gd" id="1_ekxnf"]
-[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="1_l6cm7"]
 [ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/Fonts/PublicPixel.otf" id="3_bqqt6"]
+[ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="3_wu84c"]
+[ext_resource type="AudioStream" uid="uid://c5g3xh6djekui" path="res://assets/sounds/Button.wav" id="4_wu84c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l6cm7"]
-font = ExtResource("1_l6cm7")
+font = ExtResource("3_wu84c")
 font_size = 72
 
 [sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
-font = ExtResource("1_l6cm7")
+font = ExtResource("3_wu84c")
 font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
@@ -62,8 +63,9 @@ offset_bottom = 40.0
 
 [node name="TitleContainer" type="Control" parent="Main"]
 anchors_preset = 0
+offset_top = 56.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 96.0
 
 [node name="Title" type="Label" parent="Main/TitleContainer"]
 layout_mode = 1
@@ -108,10 +110,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 457.0
-offset_top = 300.0
-offset_right = 783.0
-offset_bottom = 528.0
+offset_left = 516.0
+offset_top = 363.0
+offset_right = 711.0
+offset_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 60
@@ -120,22 +122,11 @@ theme_override_constants/separation = 60
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_fonts/font = ExtResource("3_wu84c")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 text = "Play"
-
-[node name="Quit" type="Button" parent="Main/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("1_l6cm7")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_l6cm7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
-text = "Quit
-"
 
 [node name="PlayContainer" type="Control" parent="."]
 visible = false
@@ -218,9 +209,9 @@ label_settings = SubResource("LabelSettings_bqqt6")
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 379.0
+offset_top = 390.0
 offset_right = 1204.0
-offset_bottom = 439.0
+offset_bottom = 450.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
@@ -232,9 +223,9 @@ label_settings = SubResource("LabelSettings_bqqt6")
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 440.0
-offset_right = 1204.0
-offset_bottom = 500.0
+offset_top = 451.0
+offset_right = 1244.0
+offset_bottom = 511.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
@@ -246,9 +237,9 @@ label_settings = SubResource("LabelSettings_bqqt6")
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 502.0
+offset_top = 513.0
 offset_right = 1244.0
-offset_bottom = 562.0
+offset_bottom = 573.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
@@ -260,9 +251,9 @@ label_settings = SubResource("LabelSettings_bqqt6")
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 547.0
+offset_top = 558.0
 offset_right = 1244.0
-offset_bottom = 627.0
+offset_bottom = 638.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
@@ -275,9 +266,9 @@ label_settings = SubResource("LabelSettings_bqqt6")
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 597.0
+offset_top = 608.0
 offset_right = 1244.0
-offset_bottom = 707.0
+offset_bottom = 718.0
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 14
@@ -300,7 +291,7 @@ theme_override_constants/separation = 14
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 20
 text = "Select Gamemode"
 
 [node name="PVP" type="Button" parent="PlayContainer/VBoxGamemodes"]
@@ -308,7 +299,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "PLAYER VS PLAYER
+text = "Player vs Player
 "
 
 [node name="VBoxDifficulties" type="VBoxContainer" parent="PlayContainer/VBoxGamemodes"]
@@ -328,34 +319,36 @@ text = "AI"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "EASY"
+text = "Easy"
 
 [node name="Normal" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "NORMAL"
+text = "Normal"
 
 [node name="Hard" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "HARD"
+text = "Hard"
 
 [node name="Nightmare" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "NIGHTMARE"
+text = "Nightmare"
 
 [node name="Impossible" type="Button" parent="PlayContainer/VBoxGamemodes/VBoxDifficulties"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 16
-text = "IMPOSSIBLE"
+text = "Impossible"
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wu84c")
 
 [connection signal="pressed" from="Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="PlayContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="mouse_entered" from="PlayContainer/VBoxGamemodes/PVP" to="." method="_on_pvp_mouse_entered"]
 [connection signal="mouse_exited" from="PlayContainer/VBoxGamemodes/PVP" to="." method="_on_pvp_mouse_exited"]

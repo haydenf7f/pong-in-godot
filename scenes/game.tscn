@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfghnrdq3amtn"]
+[gd_scene load_steps=18 format=3 uid="uid://bfghnrdq3amtn"]
 
 [ext_resource type="PackedScene" uid="uid://muwm8cqgrbkp" path="res://scenes/ceiling.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://dbravapgtlax6" path="res://scenes/paddle.tscn" id="1_qxrlw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cdu5hn7g2ox4p" path="res://scripts/ball.gd" id="5_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cx44udtpynepc" path="res://scenes/goal.tscn" id="5_wowpa"]
 [ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="8_v158k"]
+[ext_resource type="AudioStream" uid="uid://cpoxo2vtmtxqf" path="res://assets/sounds/Twinkle.ogg" id="9_0tnpc"]
 
 [sub_resource type="GDScript" id="GDScript_1l0tm"]
 script/source = "extends StaticBody2D
@@ -41,6 +42,7 @@ point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
+sound_effect_volume = 0.0
 
 [node name="Paddle_P1" parent="." instance=ExtResource("1_qxrlw")]
 position = Vector2(40, 360)
@@ -73,7 +75,7 @@ z_index = -10
 custom_minimum_size = Vector2(1280, 720)
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0, 0, 0, 1)
+color = Color(0.12591085, 0.12591085, 0.12591082, 1)
 metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -164,3 +166,6 @@ scale_amount_curve = SubResource("Curve_v158k")
 visible = false
 width = 4.0
 default_color = Color(0.32915837, 0.3291584, 0.3291584, 1)
+
+[node name="Twinkle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0tnpc")

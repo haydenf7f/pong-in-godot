@@ -16,13 +16,15 @@ var ai_target_ypos := 360.0
 var ai_accuracy: float = 0 # lower number is more accurate
 @export var ai_acc_lower: float = 2 # the lower bound on ai_accuracy
 @export var ai_acc_upper: float = 35 # the upper bound on ai_accuracy
+var is_ai_enabled := false
 
 @export var is_player_one := false
 var input_enabled := true
 
-var num_collisions: int = 0
-
 func _ready() -> void:
+	if Global.current_mode != Global.Gamemode.PVP or is_ai:
+		is_ai_enabled = true
+		
 	if Global.current_mode == Global.Gamemode.PVP:
 		is_ai = false
 	elif Global.current_mode == Global.Gamemode.EASY and is_ai:
@@ -44,7 +46,9 @@ func _ready() -> void:
 	elif Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai:
 		speed = 1.5 * DEFAULT_SPEED
 		ai_accuracy = 0
-	
+		
+	reset()
+		
 	body_entered.connect(_on_body_entered)
 	
 	
@@ -53,7 +57,13 @@ func _process(delta: float) -> void:
 	
 	# Checks whether the paddle should be moved with 'W' and 'A' or Arrow Keys
 	if is_player_one:
-		direction = Input.get_axis("move_up", "move_down")
+		var wsdirection: float = Input.get_axis("move_up", "move_down")
+		var arrowdirection: float = Input.get_axis("move_up_p2", "move_down_p2")
+		
+		if arrowdirection != 0 and is_ai_enabled:
+			direction = arrowdirection
+		else:
+			direction = wsdirection
 	elif is_ai:
 		direction = _get_ai_direction()
 	else:
@@ -67,7 +77,10 @@ func _process(delta: float) -> void:
 	# clamps the y position of the paddle to 20 pixels below the top of the screen
 	# and 20 pixels above the bottom of the screen
 	# I have to get the paddle height because the origin of the paddle is the top left corner
-	position.y = clamp(position.y, paddle_height, get_viewport_rect().size.y - paddle_height)
+	if is_ai:
+		position.y = clamp(position.y, paddle_height, get_viewport_rect().size.y - paddle_height)
+	else:
+		position.y = clamp(position.y, paddle_height/2 + 5, get_viewport_rect().size.y - paddle_height/2 - 5)
 
 
 func _get_ai_direction() -> float:
@@ -87,11 +100,6 @@ func _get_ai_direction() -> float:
 			return -1
 		elif global_position.y < ai_target_ypos:
 			return 1
-	elif pos_diff < ai_accuracy:
-		if num_collisions % 2 == 0:
-			return -1
-		else:
-			return 1
 	
 	return 0
 	
@@ -100,7 +108,6 @@ func _on_body_entered(body: Node2D) -> void:
 		ai_accuracy = randf_range(ai_acc_lower, ai_acc_upper)
 		
 	if body is Ball:
-		num_collisions += 1
 		body.bounce_off_paddle(global_position.y, paddle_height)
 		_play_hit_effects(body.global_position.y)
 		
@@ -156,6 +163,10 @@ func _play_hit_effects(ball_position_y: float) -> void:
 
 	
 func reset() -> void:
+	if is_ai:
+		initial_position.y += [randf_range(-30, -15), randf_range(15, 30)].pick_random()
+		
 	var tween = create_tween()
 	tween.tween_property(self, "position", initial_position, 0.4).set_trans(Tween.TRANS_QUAD)
+	
 	

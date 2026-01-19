@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://bxlsmn80uylsq"
-path="res://.godot/imported/Paddle.wav-3703d4304a5dd40a7cc5a8fe801a6898.sample"
+uid="uid://c5g3xh6djekui"
+path="res://.godot/imported/Button.wav-17c687c1180569132999798d1e9a2b78.sample"
 
 [deps]
 
-source_file="res://assets/sounds/Paddle.wav"
-dest_files=["res://.godot/imported/Paddle.wav-3703d4304a5dd40a7cc5a8fe801a6898.sample"]
+source_file="res://assets/sounds/Button.wav"
+dest_files=["res://.godot/imported/Button.wav-17c687c1180569132999798d1e9a2b78.sample"]
 
 [params]
 

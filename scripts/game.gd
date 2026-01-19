@@ -23,9 +23,11 @@ extends Node2D
 var is_recent_goal_left: bool = false
 var winner: String = ""
 var score := Vector2i(0, 0)
+var is_ai_enabled := false
 
 @onready var ball_projection_pos: Label = $CanvasLayer/BallProjectionPos
 @onready var ball_global_pos: Label = $CanvasLayer/BallGlobalPos
+
 
 func _ready() -> void:
 	goal_left.connect("goal", _goal_handler)
@@ -36,12 +38,15 @@ func _ready() -> void:
 	break_timer.timeout.connect(_on_break_timer_timeout)
 	break_timer.start()
 	
+	if Global.current_mode != Global.Gamemode.PVP:
+		is_ai_enabled = true
+		
 	var sound_effects: Array = get_tree().get_nodes_in_group("Sound Effects")
 	for sound_effect in sound_effects:
 		if sound_effect is AudioStreamPlayer:
 			sound_effect.volume_db = sound_effect_volume
 			
-
+	
 func _process(_delta: float) -> void:
 	if break_timer.time_left == 0: return
 	timer_label.text = str("%.2f" % break_timer.time_left)
@@ -173,7 +178,6 @@ func _reset() -> void:
 	
 	ball.break_time = true
 	ball.reset(is_recent_goal_left)
-	_simulate_ball_movement()
 	
 	paddle_one.input_enabled = false
 	paddle_two.input_enabled = false
@@ -183,6 +187,16 @@ func _reset() -> void:
 	break_timer.start()
 	timer_label.visible = true
 	
+
+func _on_break_timer_timeout():
+	paddle_one.input_enabled = true
+	paddle_two.input_enabled = true
+	timer_label.visible = false
+	ball.break_time = false
+	ball.particle_trail.emitting = true
+	# Serve sound effect would go here if there was one
+	_simulate_ball_movement()
+
 
 func _game_over_routine() -> void:
 	game_over_timer.start()
@@ -199,20 +213,13 @@ func _game_over_routine() -> void:
 		winner_label.text = "Player Two Wins!"
 	
 	game_over_particles.emitting = true
+	$Twinkle.play()
 	
 	var tween = create_tween()
 	winner_label.label_settings.font_size = 1
 	tween.tween_property(winner_label, "label_settings:font_size", 36, 0.8).set_trans(Tween.TRANS_SINE)
 	
-
-func _on_break_timer_timeout():
-	paddle_one.input_enabled = true
-	paddle_two.input_enabled = true
-	timer_label.visible = false
-	ball.break_time = false
-	ball.particle_trail.emitting = true
-
-
+	
 func _on_game_over_timer_timeout():
 	score.x = 0
 	p1_score.text = str(score.x)
