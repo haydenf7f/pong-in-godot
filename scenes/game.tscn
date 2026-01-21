@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bfghnrdq3amtn"]
+[gd_scene load_steps=19 format=3 uid="uid://bfghnrdq3amtn"]
 
 [ext_resource type="PackedScene" uid="uid://muwm8cqgrbkp" path="res://scenes/ceiling.tscn" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://dbravapgtlax6" path="res://scenes/paddle.tscn" id="1_qxrlw"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cx44udtpynepc" path="res://scenes/goal.tscn" id="5_wowpa"]
 [ext_resource type="FontFile" uid="uid://bwysujfji8k46" path="res://assets/fonts/PublicPixel.otf" id="8_v158k"]
 [ext_resource type="AudioStream" uid="uid://cpoxo2vtmtxqf" path="res://assets/sounds/Twinkle.ogg" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://7jceo22y8g4r" path="res://scenes/pause_menu.tscn" id="9_vtaks"]
 
 [sub_resource type="GDScript" id="GDScript_1l0tm"]
 script/source = "extends StaticBody2D
@@ -42,7 +43,6 @@ point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wrm1d")
-sound_effect_volume = 0.0
 
 [node name="Paddle_P1" parent="." instance=ExtResource("1_qxrlw")]
 position = Vector2(40, 360)
@@ -138,6 +138,9 @@ offset_right = 132.0
 offset_bottom = 706.0
 text = "{ball pos}"
 label_settings = SubResource("LabelSettings_0tnpc")
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_vtaks")]
+visible = false
 
 [node name="Break_Timer" type="Timer" parent="."]
 wait_time = 2.0

@@ -1,5 +1,7 @@
 extends Node
 
+@export var sound_effect_volume_db: float = -13.0
+
 enum Gamemode { EASY, NORMAL, HARD, NIGHTMARE, IMPOSSIBLE, PVP  }
 @export var current_mode: Gamemode = Gamemode.NORMAL
 

@@ -2,28 +2,34 @@ extends Control
 
 @onready var button_press := $ButtonPress
 
+
+func _await_play_button_sound():
+	button_press.play()
+	await button_press.finished
+
+
 func _load_game_scene() -> void:
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	
 
 func _on_play_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	$Main.visible = false
 	$PlayContainer.visible = true
 	
 
 func _on_quit_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	get_tree().quit()
 
 func _on_back_pressed() -> void:
+	_await_play_button_sound()
 	$PlayContainer.visible = false
-	button_press.play()
 	$Main.visible = true
 	
 
 func _on_pvp_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.PVP
 	_load_game_scene()
 
@@ -36,7 +42,7 @@ func _on_pvp_mouse_exited() -> void:
 
 
 func _on_easy_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.EASY
 	_load_game_scene()
 
@@ -49,7 +55,7 @@ func _on_easy_mouse_exited() -> void:
 
 
 func _on_normal_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.NORMAL
 	_load_game_scene()
 
@@ -62,7 +68,7 @@ func _on_normal_mouse_exited() -> void:
 
 
 func _on_hard_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.HARD	
 	_load_game_scene()
 	
@@ -75,7 +81,7 @@ func _on_hard_mouse_exited() -> void:
 
 
 func _on_nightmare_pressed() -> void:
-	button_press.play()
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.NIGHTMARE
 	_load_game_scene()
 	
@@ -88,6 +94,7 @@ func _on_nightmare_mouse_exited() -> void:
 
 
 func _on_impossible_pressed() -> void:
+	_await_play_button_sound()
 	Global.current_mode = Global.Gamemode.IMPOSSIBLE
 	_load_game_scene()
 

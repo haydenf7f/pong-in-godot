@@ -17,7 +17,6 @@ extends Node2D
 @onready var game_over_timer: Timer = $GameOverTimer
 @onready var game_over_particles: CPUParticles2D = $GameOverParticles
 
-@export var sound_effect_volume: float = -12.0
 @export var win_score := 11
 
 var is_recent_goal_left: bool = false
@@ -44,7 +43,7 @@ func _ready() -> void:
 	var sound_effects: Array = get_tree().get_nodes_in_group("Sound Effects")
 	for sound_effect in sound_effects:
 		if sound_effect is AudioStreamPlayer:
-			sound_effect.volume_db = sound_effect_volume
+			sound_effect.volume_db = Global.sound_effect_volume_db
 			
 	
 func _process(_delta: float) -> void:
@@ -60,8 +59,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		_reset()
 	elif event.is_action_pressed("show_lines"):
 		ball_path.visible = !ball_path.visible
-	elif event.is_action_pressed("main_menu"):
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		
 	
 func _draw() -> void:
