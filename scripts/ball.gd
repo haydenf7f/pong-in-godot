@@ -20,8 +20,8 @@ var max_particle_velocity: float = 50
 
 @onready var cshape: CollisionShape2D = $CollisionShape2D
 
-signal bounced
-
+signal paddle_bounced
+signal ceiling_bounced
 
 func _ready() -> void:
 	particle_trail.emitting = false
@@ -49,7 +49,9 @@ func _physics_process(_delta: float) -> void:
 		
 		# Checks if the object collided with is the ceiling, which is the only StaticBody2D in the game
 		if collider.get_collider() is StaticBody2D:
-			$CeilingBounce.play()
+			%CeilingBounceAudio.play()
+			
+			ceiling_bounced.emit()
 			
 			if collider.get_normal().y == 1: # if the normal points down, we hit the top ceiling
 				bounce_particle.position = Vector2(0, -15)
@@ -77,7 +79,7 @@ func bounce_off_paddle(paddle_y, paddle_height) -> void:
 	num_collisions += 1
 	direction = Vector2(direction.x*-1, (ball_y - paddle_y) / (paddle_height/2))
 	
-	bounced.emit()
+	paddle_bounced.emit()
 	
 	_update_ball_particles()
 	
@@ -100,6 +102,7 @@ func reset(is_goal_left: bool) -> void:
 	particle_trail.initial_velocity_max = max_particle_velocity
 	
 
-func get_size() -> Vector2:
+# used in the _simulate_ball_movement() function in game.gd
+func get_size() -> Vector2: #returns the size of the ball's collision shape
 	return cshape.shape.get_rect().size
 	

@@ -14,8 +14,8 @@ func _load_game_scene() -> void:
 
 func _on_play_pressed() -> void:
 	_await_play_button_sound()
-	$Main.visible = false
-	$PlayContainer.visible = true
+	%Main.visible = false
+	%PlayContainer.visible = true
 	
 
 func _on_quit_pressed() -> void:
@@ -24,8 +24,8 @@ func _on_quit_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	_await_play_button_sound()
-	$PlayContainer.visible = false
-	$Main.visible = true
+	%PlayContainer.visible = false
+	%Main.visible = true
 	
 
 func _on_pvp_pressed() -> void:
@@ -34,10 +34,10 @@ func _on_pvp_pressed() -> void:
 	_load_game_scene()
 
 func _on_pvp_mouse_entered() -> void:
-	$PlayContainer/Tooltips/PVPTooltip.visible = true
+	%PlayContainer/Tooltips/PVPTooltip.visible = true
 
 func _on_pvp_mouse_exited() -> void:
-	$PlayContainer/Tooltips/PVPTooltip.visible = false
+	%PlayContainer/Tooltips/PVPTooltip.visible = false
 
 
 
@@ -47,10 +47,10 @@ func _on_easy_pressed() -> void:
 	_load_game_scene()
 
 func _on_easy_mouse_entered() -> void:
-	$PlayContainer/Tooltips/EasyTooltip.visible = true
+	%PlayContainer/Tooltips/EasyTooltip.visible = true
 
 func _on_easy_mouse_exited() -> void:
-	$PlayContainer/Tooltips/EasyTooltip.visible = false
+	%PlayContainer/Tooltips/EasyTooltip.visible = false
 
 
 
@@ -60,10 +60,10 @@ func _on_normal_pressed() -> void:
 	_load_game_scene()
 
 func _on_normal_mouse_entered() -> void:
-	$PlayContainer/Tooltips/NormalTooltip.visible = true
+	%PlayContainer/Tooltips/NormalTooltip.visible = true
 
 func _on_normal_mouse_exited() -> void:
-	$PlayContainer/Tooltips/NormalTooltip.visible = false
+	%PlayContainer/Tooltips/NormalTooltip.visible = false
 
 
 
@@ -73,10 +73,10 @@ func _on_hard_pressed() -> void:
 	_load_game_scene()
 	
 func _on_hard_mouse_entered() -> void:
-	$PlayContainer/Tooltips/HardTooltip.visible = true
+	%PlayContainer/Tooltips/HardTooltip.visible = true
 
 func _on_hard_mouse_exited() -> void:
-	$PlayContainer/Tooltips/HardTooltip.visible = false
+	%PlayContainer/Tooltips/HardTooltip.visible = false
 
 
 
@@ -86,20 +86,8 @@ func _on_nightmare_pressed() -> void:
 	_load_game_scene()
 	
 func _on_nightmare_mouse_entered() -> void:
-	$PlayContainer/Tooltips/NightmareTooltip.visible = true
+	%PlayContainer/Tooltips/NightmareTooltip.visible = true
 
 func _on_nightmare_mouse_exited() -> void:
-	$PlayContainer/Tooltips/NightmareTooltip.visible = false
-
-
-
-func _on_impossible_pressed() -> void:
-	_await_play_button_sound()
-	Global.current_mode = Global.Gamemode.IMPOSSIBLE
-	_load_game_scene()
-
-func _on_impossible_mouse_entered() -> void:
-	$PlayContainer/Tooltips/ImpossibleTooltip.visible = true
-
-func _on_impossible_mouse_exited() -> void:
-	$PlayContainer/Tooltips/ImpossibleTooltip.visible = false
+	%PlayContainer/Tooltips/NightmareTooltip.visible = false
+	

@@ -2,7 +2,7 @@ extends Node
 
 @export var sound_effect_volume_db: float = -13.0
 
-enum Gamemode { EASY, NORMAL, HARD, NIGHTMARE, IMPOSSIBLE, PVP  }
+enum Gamemode { EASY, NORMAL, HARD, NIGHTMARE, PVP  }
 @export var current_mode: Gamemode = Gamemode.NORMAL
 
 func gamemode_to_string(gamemode: Gamemode) -> String:
@@ -15,8 +15,6 @@ func gamemode_to_string(gamemode: Gamemode) -> String:
 			return "Hard"
 		Gamemode.NIGHTMARE:
 			return "Nightmare"
-		Gamemode.IMPOSSIBLE:
-			return "Impossible"
 		Gamemode.PVP:
 			return "Player vs Player"
 	return ""

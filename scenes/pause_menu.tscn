@@ -182,7 +182,8 @@ libraries = {
 
 [node name="ButtonPress" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
 stream = ExtResource("4_5d2l8")
-volume_db = 12.0
+volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

@@ -9,8 +9,8 @@ var direction := 0.0
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var paddle_height := collision_shape.get_shape().get_rect().size.y
 
-@onready var paddle_particle: CPUParticles2D = $PaddleParticle
-@onready var bounce_particle: CPUParticles2D = $BounceParticle
+@onready var paddle_particle: CPUParticles2D = %PaddleParticle
+@onready var bounce_particle: CPUParticles2D = %BounceParticle
 
 @export var is_ai := false
 var ai_accuracy: float = 0 # lower number is more accurate
@@ -44,11 +44,6 @@ func _ready() -> void:
 		speed = DEFAULT_SPEED
 		ai_acc_lower = 2
 		ai_acc_upper = 30
-	elif Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai:
-		speed = 1.5 * DEFAULT_SPEED
-		ai_accuracy = 0
-		ai_acc_lower = 0
-		ai_acc_upper = 0
 		
 	reset()
 		
@@ -73,9 +68,6 @@ func _process(delta: float) -> void:
 		direction = Input.get_axis("move_up_p2", "move_down_p2")	
 		
 	position.y += direction * speed * delta
-	
-	# The IMPOSSIBLE AI gets to cheat by using the entire screen space
-	if Global.current_mode == Global.Gamemode.IMPOSSIBLE and is_ai: return
 	
 	# clamps the y position of the paddle to the specified pixel amount.
 	# I have to get the paddle height because the origin of the paddle is the top left corner
@@ -113,16 +105,13 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Ball:
 		body.bounce_off_paddle(global_position.y, paddle_height)
 		_play_hit_effects(body.global_position.y)
-		
 
-func _play_hit_effects(ball_position_y: float) -> void:
-	# Sound Effect
-	$Bounce.play()
-	
-	# Particle effect
+
+func _emit_bounce_particles(ball_position_y: float) -> void:
 	paddle_particle.emitting = false
 	paddle_particle.restart()
 	
+	# Particle effect emission direction for each paddle
 	if is_player_one:
 		paddle_particle.gravity.x = -100
 		bounce_particle.gravity.x = 300
@@ -134,7 +123,9 @@ func _play_hit_effects(ball_position_y: float) -> void:
 	
 	bounce_particle.emitting = true
 	paddle_particle.emitting = true
-	
+
+
+func _paddle_hit_effect() -> void:
 	# Hit effect parameters
 	var darken_color := Color(0.70, 0.70, 0.70, 1.0)  # 75% brightness
 	var press_scale := Vector2(0.98, 0.98)            # subtle squash
@@ -164,6 +155,14 @@ func _play_hit_effects(ball_position_y: float) -> void:
 	else:
 		_hit_tween.tween_property(self, "position:x", position.x - 3, out_time)
 
+
+func _play_hit_effects(ball_position_y: float) -> void:
+	# plays audio, emits particles, paddle flashes and recoils
+	%BounceAudio.play()
+	_emit_bounce_particles(ball_position_y)
+	_paddle_hit_effect()
+	
+
 	
 func reset() -> void:
 	if is_ai:
@@ -171,5 +170,4 @@ func reset() -> void:
 		
 	var tween = create_tween()
 	tween.tween_property(self, "position", initial_position, 0.4).set_trans(Tween.TRANS_QUAD)
-	
 	

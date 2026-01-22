@@ -66,6 +66,7 @@ offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wu84c")
 
 [node name="Main" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -138,6 +139,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 text = "Play"
 
 [node name="PlayContainer" type="Control" parent="."]
+unique_name_in_owner = true
 visible = false
 anchors_preset = 0
 offset_right = 40.0
@@ -384,6 +386,8 @@ text = "Impossible"
 
 [node name="ButtonPress" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
 stream = ExtResource("3_bqqt6")
+volume_db = 10.0
+bus = &"SFX"
 
 [connection signal="pressed" from="Main/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="PlayContainer/Back" to="." method="_on_back_pressed"]

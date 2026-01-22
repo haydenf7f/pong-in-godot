@@ -15,8 +15,11 @@ position = Vector2(-10, 360)
 shape = SubResource("RectangleShape2D_ax2ce")
 
 [node name="GoalExplosion" parent="." instance=ExtResource("2_in2gb")]
+unique_name_in_owner = true
 position = Vector2(-10, 360)
 scale = Vector2(6, 6)
 
 [node name="GoalSound" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+unique_name_in_owner = true
 stream = ExtResource("1_paeek")
+bus = &"SFX"

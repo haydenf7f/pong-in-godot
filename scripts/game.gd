@@ -10,7 +10,7 @@ extends Node2D
 
 @onready var p1_score: Label = $CanvasLayer/P1_Score
 @onready var p2_score: Label = $CanvasLayer/P2_Score
-@onready var timer_label: Label = $CanvasLayer/TimerLabel
+@onready var ball_timer_label: Label = $CanvasLayer/TimerLabel
 @onready var winner_label: Label = $CanvasLayer/WinnerLabel
 
 @onready var break_timer: Timer = $Break_Timer
@@ -18,6 +18,9 @@ extends Node2D
 @onready var game_over_particles: CPUParticles2D = $GameOverParticles
 
 @export var win_score := 11
+
+@onready var soundtracks: Array[AudioStreamPlayer] = [$Soundtracks/Stage1, $Soundtracks/Stage2, $Soundtracks/Boss]
+var soundtrack_playing: bool = false
 
 var is_recent_goal_left: bool = false
 var winner: String = ""
@@ -27,28 +30,27 @@ var is_ai_enabled := false
 @onready var ball_projection_pos: Label = $CanvasLayer/BallProjectionPos
 @onready var ball_global_pos: Label = $CanvasLayer/BallGlobalPos
 
+var rules: Node
+
 
 func _ready() -> void:
 	goal_left.connect("goal", _goal_handler)
 	goal_right.connect("goal", _goal_handler)
 	game_over_timer.timeout.connect(_on_game_over_timer_timeout)
-	ball.bounced.connect(_on_ball_bounced)
-	
+	ball.paddle_bounced.connect(_on_ball_bounced)
+
 	break_timer.timeout.connect(_on_break_timer_timeout)
 	break_timer.start()
 	
+	rules = %Rules
+	
 	if Global.current_mode != Global.Gamemode.PVP:
 		is_ai_enabled = true
-		
-	var sound_effects: Array = get_tree().get_nodes_in_group("Sound Effects")
-	for sound_effect in sound_effects:
-		if sound_effect is AudioStreamPlayer:
-			sound_effect.volume_db = Global.sound_effect_volume_db
 			
 	
 func _process(_delta: float) -> void:
 	if break_timer.time_left == 0: return
-	timer_label.text = str("%.2f" % break_timer.time_left)
+	ball_timer_label.text = str("%.2f" % break_timer.time_left)
 		
 	
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -118,20 +120,10 @@ func _simulate_ball_movement(seconds: float = 3.0):
 			ball_dir.y *= -1
 			points.append(ball_pos)
 			
-		#if ball_pos.y < top_limit:
-			#var overshoot: float = top_limit - ball_pos.y
-			#ball_pos.y = top_limit + overshoot
-			#ball_dir.y = abs(ball_dir.y)
-			#points.append(ball_pos)
-		#elif ball_pos.y > bottom_limit:
-			#var overshoot: float= ball_pos.y - bottom_limit
-			#ball_pos.y = bottom_limit - overshoot
-			#ball_dir.y = -abs(ball_dir.y)
-			#points.append(ball_pos)
 	
 	points.append(ball_pos)
 	
-	if Global.current_mode == Global.Gamemode.NIGHTMARE or Global.current_mode == Global.Gamemode.IMPOSSIBLE:
+	if Global.current_mode == Global.Gamemode.NIGHTMARE:
 		if paddle_one.is_ai:
 			paddle_one.ai_target_ypos = ball_pos.y
 			
@@ -153,34 +145,36 @@ func _tie_break_handler() -> void:
 func _goal_handler(is_player_one_goal: bool) -> void:
 	is_recent_goal_left = is_player_one_goal
 	
+	# Who scored the goal
 	if is_player_one_goal:
 		score.y += 1
 		p2_score.text = str(score.y)
 	else:
 		score.x += 1
 		p1_score.text = str(score.x)
-	
+
+	# Win check
 	if score.x == win_score:
-		# win by 2 check
-		if !_is_win_by_two():
-			_tie_break_handler()
+		if abs(score.x - score.y) < 2:
+			win_score += 1
+			_reset()
 			return
-			
+
 		winner = "paddle_one"
 		_game_over_routine()
 		return
-	elif score.y == win_score:
-		# win by 2 check
-		if !_is_win_by_two():
-			_tie_break_handler()
+
+	if score.y == win_score:
+		if abs(score.x - score.y) < 2:
+			win_score += 1
+			_reset()
 			return
-			
+
 		winner = "paddle_two"
 		_game_over_routine()
 		return
-		
+
 	_reset()
-	
 
 func _reset() -> void:
 	ball_path.clear_points()
@@ -194,16 +188,20 @@ func _reset() -> void:
 	paddle_two.reset()
 	
 	break_timer.start()
-	timer_label.visible = true
+	ball_timer_label.visible = true
 	
 
 func _on_break_timer_timeout():
 	paddle_one.input_enabled = true
 	paddle_two.input_enabled = true
-	timer_label.visible = false
+	ball_timer_label.visible = false
 	ball.break_time = false
 	ball.particle_trail.emitting = true
-	# Serve sound effect would go here if there was one
+	
+	if !soundtrack_playing:
+		soundtracks.pick_random().play()
+		soundtrack_playing = true
+		
 	_simulate_ball_movement()
 
 
@@ -227,7 +225,7 @@ func _game_over_routine() -> void:
 		
 	
 	game_over_particles.emitting = true
-	$Twinkle.play()
+	%Twinkle.play()
 	
 	var tween = create_tween()
 	winner_label.label_settings.font_size = 1

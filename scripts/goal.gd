@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var goal_explosion: CPUParticles2D = $GoalExplosion
+@onready var goal_explosion: CPUParticles2D = %GoalExplosion
 @export var is_player_one_goal: bool = false
 
 signal goal(is_player_one_goal: bool)
@@ -14,7 +14,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Ball:
 		_goal_particles(body.global_position.y)
 		goal.emit(is_player_one_goal)
-		$GoalSound.play()
+		%GoalSound.play()
 		
 
 func _goal_particles(ball_position: float) -> void:

@@ -61,5 +61,7 @@ scale_amount_min = 3.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_ij5cq")
 
-[node name="CeilingBounce" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+[node name="CeilingBounceAudio" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+unique_name_in_owner = true
 stream = ExtResource("1_d60mj")
+bus = &"SFX"

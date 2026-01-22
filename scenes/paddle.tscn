@@ -26,6 +26,7 @@ offset_right = 10.0
 offset_bottom = 50.0
 
 [node name="PaddleParticle" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
 visible = false
 position = Vector2(-9, 0)
 rotation = 1.5707964
@@ -46,6 +47,7 @@ scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_rripy")
 
 [node name="BounceParticle" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(10, 0)
 rotation = 1.5707964
 emitting = false
@@ -64,6 +66,8 @@ scale_amount_min = 3.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_nxw3c")
 
-[node name="Bounce" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+[node name="BounceAudio" type="AudioStreamPlayer" parent="." groups=["Sound Effects"]]
+unique_name_in_owner = true
 stream = ExtResource("2_krcey")
 volume_db = -5.0
+bus = &"SFX"
